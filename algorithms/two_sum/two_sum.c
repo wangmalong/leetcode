@@ -1,3 +1,23 @@
+// Source : https://oj.leetcode.com/problems/two-sum/
+// // Author : Wang MaLong
+// // Date   : 2015-05-13
+// // Runtime: 6ms
+//
+// /********************************************************************************** 
+// * 
+// * Given an array of integers, find two numbers such that they add up to a specific target number.
+// * 
+// * The function twoSum should return indices of the two numbers such that they add up to the target, 
+// * where index1 must be less than index2. Please note that your returned answers (both index1 and index2) 
+// * are not zero-based.
+// * 
+// * You may assume that each input would have exactly one solution.
+// * 
+// * Input: numbers={2, 7, 11, 15}, target=9
+// * Output: index1=1, index2=2
+// * 
+// *               
+// **********************************************************************************/
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -49,10 +69,10 @@ Hashtable* hashtable_init(int size){
     hashtable->size = size;
     hashtable->item_size = 0;
     HashNode* head = (HashNode *)calloc(size, sizeof(HashNode));
-	for(int i=0; i<size; i++)
-	{
-		head[i].key = EMPTY;
-	}
+    for(int i=0; i<size; i++)
+    {
+        head[i].key = EMPTY;
+    }
     hashtable->head = head;
     return hashtable;
 }
@@ -156,29 +176,29 @@ void hashtable_destroy(Hashtable *hashtable){
  */
 int* twoSum(int* nums, int numsSize, int target) 
 {
-	int i=0;
-	Hashtable *h_table = hashtable_init(numsSize);
-	int* ret = (int*)malloc(sizeof(int)*2);
-	for(i=0; i<numsSize; i++)
-	{
-		if(hashtable_get(h_table,nums[i])==EMPTY)
-		{
-			hashtable_put(h_table, target-nums[i], i);
-		}
-		else
-		{
-			ret[0] = hashtable_get(h_table, nums[i])+1;
-			ret[1] = i+1;
-		}
-	}
-	hashtable_destroy(h_table);
+    int i=0;
+    Hashtable *h_table = hashtable_init(numsSize);
+    int* ret = (int*)malloc(sizeof(int)*2);
+    for(i=0; i<numsSize; i++)
+    {
+        if(hashtable_get(h_table,nums[i])==EMPTY)
+        {
+            hashtable_put(h_table, target-nums[i], i);
+        }
+        else
+        {
+            ret[0] = hashtable_get(h_table, nums[i])+1;
+            ret[1] = i+1;
+        }
+    }
+    hashtable_destroy(h_table);
     return ret;
 }
 
 int main()
 {
-	int s[]={1,3,6,34,21,42,4,56,7,234,54,6};
-	int* ret = twoSum(s, 12, 60);
-    printf("s[%d](%d) + s[%d](%d) = %d  ",ret[0]-1, s[ret[0]-1], ret[1]-1, s[ret[1]-1], s[ret[0]-1]+s[ret[1]-1]);
-	return 0;
+    int s[]={1,3,6,34,21,42,4,56,7,234,54,6};
+    int* ret = twoSum(s, 12, 60);
+    printf("s[%d](%d) + s[%d](%d) = %d\n",ret[0]-1, s[ret[0]-1], ret[1]-1, s[ret[1]-1], s[ret[0]-1]+s[ret[1]-1]);
+    return 0;
 }
