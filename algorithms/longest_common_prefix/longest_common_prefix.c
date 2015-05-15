@@ -14,62 +14,62 @@
 #include <string.h>
 
 typedef struct _prefix{
-	char *value;
-	int len;
+    char *value;
+    int len;
 }prefix;
 
 void getCommonPreix(prefix *pref, char *next_str)
 {
-	int pos = 0, next_str_len=0;
+    int pos = 0, next_str_len=0;
 
-	next_str_len = strlen(next_str);
+    next_str_len = strlen(next_str);
 
-	while(pos < pref->len && pos < next_str_len)
-	{
-		if (pref->value[pos] != next_str[pos]) 
-		{
-			pref->len = pos;
-			break;
-		}
+    while(pos < pref->len && pos < next_str_len)
+    {
+        if (pref->value[pos] != next_str[pos]) 
+        {
+            pref->len = pos;
+            break;
+        }
 
-		pos++;
-	}
+        pos++;
+    }
 
-	pref->len = pos;
+    pref->len = pos;
 }
 
 char* longestCommonPrefix(char **strs, int strsSize)
 {
-	char *ret;
-	int i=1;
-	prefix pref;
-	
-	if (strsSize == 0) return NULL;
-	if (strsSize == 1) return strs[0];
+    char *ret;
+    int i=1;
+    prefix pref;
+    
+    if (strsSize == 0) return NULL;
+    if (strsSize == 1) return strs[0];
 
-	pref.value = strs[0];
-	pref.len = strlen(strs[0]);
+    pref.value = strs[0];
+    pref.len = strlen(strs[0]);
 
 
-	while(i<strsSize)
-	{
-		getCommonPreix(&pref, strs[i++]);
-	}
+    while(i<strsSize)
+    {
+        getCommonPreix(&pref, strs[i++]);
+    }
 
-	if (pref.len == 0) return NULL;
+    if (pref.len == 0) return NULL;
 
-	ret = (char*)calloc(1, pref.len+1);
-	strncpy(ret, pref.value, pref.len);
+    ret = (char*)calloc(1, pref.len+1);
+    strncpy(ret, pref.value, pref.len);
 
-	return ret;
+    return ret;
 }
 
 int main()
 {
-	char *strs[] = {"aa","a"};
-	char *p = longestCommonPrefix(strs, 2);
+    char *strs[] = {"aa","a"};
+    char *p = longestCommonPrefix(strs, 2);
 
-	printf("%s\n",p?p:"NONE");
+    printf("%s\n",p?p:"NONE");
 
-	return 0;
+    return 0;
 }
